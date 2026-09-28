@@ -312,18 +312,25 @@
             background: #cbd5e1;
         }
 
+        /* حاوية الجدول لضمان عدم الانعكاس والعمل بسلاسة على الجوال */
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+            direction: ltr;
+            border-radius: 10px;
+            border: 1px solid #e2e8f0;
+        }
+
         table {
             width: 100%;
             border-collapse: collapse;
             background: #fff;
-            border-radius: 10px;
-            overflow: hidden;
-            border: 1px solid #e2e8f0;
+            white-space: nowrap;
         }
 
         th, td {
-            padding: 10px 12px;
-            text-align: center;
+            padding: 12px 15px;
+            text-align: left;
             border-bottom: 1px solid #f1f5f9;
             font-size: 13px;
         }
@@ -824,24 +831,26 @@
                         <h3>Verbs and Meanings / الأفعال ومعانيها</h3>
                         <button class="close-modal-btn" onclick="closeModal()">إغلاق ✕</button>
                     </div>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Verb (v1)</th>
-                                <th>Past (v2)</th>
-                                <th>Past Participle (v3)</th>
-                                <th>Meaning (المعنى)</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr><td>accept</td><td>accepted</td><td>accepted</td><td>يقبل</td></tr>
-                            <tr><td>begin</td><td>began</td><td>begun</td><td>يبدأ</td></tr>
-                            <tr><td>break</td><td>broke</td><td>broken</td><td>يكسر</td></tr>
-                            <tr><td>bring</td><td>brought</td><td>brought</td><td>يحضر</td></tr>
-                            <tr><td>eat</td><td>ate</td><td>eaten</td><td>يأكل</td></tr>
-                            <tr><td>go</td><td>went</td><td>gone</td><td>يذهب</td></tr>
-                        </tbody>
-                    </table>
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Verb (v1)</th>
+                                    <th>Past (v2)</th>
+                                    <th>Past Participle (v3)</th>
+                                    <th>Meaning (المعنى)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>accept</td><td>accepted</td><td>accepted</td><td>يقبل</td></tr>
+                                <tr><td>begin</td><td>began</td><td>begun</td><td>يبدأ</td></tr>
+                                <tr><td>break</td><td>broke</td><td>broken</td><td>يكسر</td></tr>
+                                <tr><td>bring</td><td>brought</td><td>brought</td><td>يحضر</td></tr>
+                                <tr><td>eat</td><td>ate</td><td>eaten</td><td>يأكل</td></tr>
+                                <tr><td>go</td><td>went</td><td>gone</td><td>يذهب</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>`,
             'section3': `
                 <div class="section-modal-content" style="display:block;">
@@ -849,22 +858,24 @@
                         <h3>Words, Forms & Meanings / كلمات المنهاج والمعاني</h3>
                         <button class="close-modal-btn" onclick="closeModal()">إغلاق ✕</button>
                     </div>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Word</th>
-                                <th>Form</th>
-                                <th>Mean</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr><td>Book</td><td>Noun (اسم)</td><td>كتاب</td></tr>
-                            <tr><td>School</td><td>Noun (اسم)</td><td>مدرسة</td></tr>
-                            <tr><td>Teacher</td><td>Noun (اسم)</td><td>معلم</td></tr>
-                            <tr><td>Student</td><td>Noun (اسم)</td><td>طالب</td></tr>
-                            <tr><td>Playing</td><td>Verb/Noun</td><td>يلعب / اللعب</td></tr>
-                        </tbody>
-                    </table>
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Word</th>
+                                    <th>Form</th>
+                                    <th>Mean</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>Book</td><td>Noun (اسم)</td><td>كتاب</td></tr>
+                                <tr><td>School</td><td>Noun (اسم)</td><td>مدرسة</td></tr>
+                                <tr><td>Teacher</td><td>Noun (اسم)</td><td>معلم</td></tr>
+                                <tr><td>Student</td><td>Noun (اسم)</td><td>طالب</td></tr>
+                                <tr><td>Playing</td><td>Verb/Noun</td><td>يلعب / اللعب</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>`,
             'sectionReading': `
                 <div class="section-modal-content" style="display:block;">
@@ -901,6 +912,9 @@
                     <ul class="audio-list">
                         <li><span>Grammar File 1</span><a href="https://drive.google.com/file/d/1onHuM9x81AdoGrTvNY7ahCEe02Zh3jQh/view?usp=drivesdk" target="_blank" class="audio-btn">Open File 💡</a></li>
                         <li><span>Grammar File 2</span><a href="https://drive.google.com/file/d/1ONV6RgFGHw2l_ZnOEKwtr47qiaQlnn47/view?usp=drivesdk" target="_blank" class="audio-btn">Open File 💡</a></li>
+                        <li><span>Grammar File 3</span><a href="https://drive.google.com/file/d/1xK87FWLpT_9pgJVGIugyygkDMzofuUEB/view?usp=drivesdk" target="_blank" class="audio-btn">Open File 💡</a></li>
+                        <li><span>Grammar File 4</span><a href="https://drive.google.com/file/d/1P2Un8wW8krLOrmflv1RjC0Pn0UAvUq6Y/view?usp=drivesdk" target="_blank" class="audio-btn">Open File 💡</a></li>
+                        <li><span>Grammar File 5</span><a href="https://drive.google.com/file/d/1JYXZ36IGVbPa9BXFi3MpMkJSLc25bQpa/view?usp=drivesdk" target="_blank" class="audio-btn">Open File 💡</a></li>
                     </ul>
                 </div>`,
             'sectionAssignments': getAssignmentsContent(),
@@ -1014,19 +1028,21 @@
                     <h3>Leaderboard</h3>
                     <button class="close-modal-btn" onclick="closeModal()">إغلاق ✕</button>
                 </div>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Rank</th>
-                            <th>Name</th>
-                            <th>Class</th>
-                            <th>Score</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        ${tableRows}
-                    </tbody>
-                </table>
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Rank</th>
+                                <th>Name</th>
+                                <th>Class</th>
+                                <th>Score</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${tableRows}
+                        </tbody>
+                    </table>
+                </div>
             </div>`;
         }
 
