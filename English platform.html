@@ -1,0 +1,1035 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English Language Platform - منصة اللغة الانجليزية</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #312e81 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .login-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            width: 100%;
+            max-width: 420px;
+            text-align: center;
+            animation: fadeIn 0.6s ease-in-out;
+        }
+
+        .login-header h1 {
+            color: #1e1b4b;
+            font-size: 26px;
+            font-weight: 900;
+            margin-bottom: 5px;
+        }
+
+        .login-header p {
+            color: #6366f1;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .login-tabs {
+            display: flex;
+            background: #f1f5f9;
+            border-radius: 10px;
+            padding: 4px;
+            margin-bottom: 20px;
+        }
+
+        .tab-btn {
+            flex: 1;
+            background: transparent;
+            border: none;
+            padding: 8px;
+            font-size: 13px;
+            font-weight: 700;
+            color: #64748b;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        .tab-btn.active {
+            background: #ffffff;
+            color: #4f46e5;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .input-group {
+            margin-bottom: 18px;
+            text-align: right;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 6px;
+            color: #334155;
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .input-group input, .input-group select {
+            width: 100%;
+            padding: 12px 14px;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 15px;
+            outline: none;
+            transition: all 0.3s ease;
+            background: #f8fafc;
+            direction: ltr;
+            text-align: left;
+        }
+
+        .input-group input:focus, .input-group select:focus {
+            border-color: #6366f1;
+            background: #fff;
+            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+        }
+
+        .error-msg {
+            color: #ef4444;
+            font-size: 13px;
+            margin-top: 8px;
+            display: none;
+            font-weight: 600;
+            text-align: right;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin-top: 10px;
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(99, 102, 241, 0.6);
+        }
+
+        .dashboard-container {
+            display: none;
+            background: #ffffff;
+            padding: 35px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            width: 100%;
+            max-width: 1050px;
+            animation: fadeIn 0.5s ease-in-out;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            border-bottom: 2px solid #f1f5f9;
+            padding-bottom: 15px;
+        }
+
+        .dashboard-header h2 {
+            color: #1e1b4b;
+            font-size: 20px;
+            font-weight: 900;
+        }
+
+        .dashboard-header p {
+            color: #64748b;
+            font-size: 13px;
+        }
+
+        .top-bar-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #eef2ff;
+            padding: 12px 18px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+
+        .user-welcome-banner {
+            color: #4f46e5;
+            font-size: 17px;
+            font-weight: 800;
+            direction: ltr;
+        }
+
+        .points-badge {
+            background: #4f46e5;
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 700;
+            box-shadow: 0 2px 6px rgba(79, 70, 229, 0.3);
+        }
+
+        .logout-btn {
+            background: #ef4444;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 700;
+            transition: background 0.3s;
+        }
+
+        .logout-btn:hover {
+            background: #dc2626;
+        }
+
+        .sections-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .section-card {
+            background: #f8fafc;
+            border: 2px solid #f1f5f9;
+            border-radius: 14px;
+            padding: 18px 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .section-card:hover {
+            border-color: #6366f1;
+            background: #fff;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .main-title-box {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .en-main-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #1e293b;
+        }
+
+        .ar-sub-title {
+            font-size: 12px;
+            font-weight: 400;
+            color: #64748b;
+            margin-top: 2px;
+        }
+
+        .card-icon {
+            font-size: 18px;
+            color: #6366f1;
+        }
+
+        .section-modal-content {
+            display: none;
+            background: #ffffff;
+            padding: 25px;
+            border-radius: 14px;
+            border: 2px solid #6366f1;
+            margin-top: 20px;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 10px;
+        }
+
+        .modal-header h3 {
+            color: #1e1b4b;
+            font-size: 18px;
+        }
+
+        .close-modal-btn {
+            background: #e2e8f0;
+            border: none;
+            padding: 5px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 700;
+            color: #334155;
+        }
+
+        .close-modal-btn:hover {
+            background: #cbd5e1;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: center;
+            border-bottom: 1px solid #f1f5f9;
+            font-size: 14px;
+        }
+
+        th {
+            background-color: #4f46e5;
+            color: white;
+            font-weight: 700;
+        }
+
+        tr:hover td {
+            background-color: #f8fafc;
+        }
+
+        .audio-list {
+            list-style: none;
+        }
+
+        .audio-list li {
+            background: #f8fafc;
+            padding: 14px 18px;
+            margin-bottom: 10px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid #e2e8f0;
+            font-weight: 600;
+            color: #334155;
+            direction: ltr;
+        }
+
+        .audio-btn {
+            background: #6366f1;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+
+        .audio-btn:hover {
+            background: #4f46e5;
+        }
+
+        .form-control-custom {
+            width: 100%;
+            padding: 10px 14px;
+            border: 2px solid #cbd5e1;
+            border-radius: 8px;
+            font-size: 14px;
+            margin-bottom: 12px;
+            outline: none;
+            direction: ltr;
+        }
+
+        .form-control-custom:focus {
+            border-color: #4f46e5;
+        }
+
+        .submit-quiz-btn {
+            background: #4f46e5;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .submit-quiz-btn:hover {
+            background: #4338ca;
+        }
+
+        .delete-btn {
+            background: #ef4444;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-weight: 700;
+            cursor: pointer;
+            font-size: 12px;
+        }
+
+        .delete-btn:hover {
+            background: #dc2626;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 30px;
+            color: #64748b;
+            font-size: 15px;
+            font-weight: 600;
+            background: #f8fafc;
+            border-radius: 10px;
+            border: 1px dashed #cbd5e1;
+        }
+
+        .hidden-messi-quote {
+            text-align: center;
+            font-size: 10px;
+            color: #94a3b8;
+            margin-top: 30px;
+            opacity: 0.7;
+            direction: ltr;
+            letter-spacing: 0.5px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- شاشة تسجيل الدخول -->
+    <div class="login-container" id="loginBox">
+        <div class="login-header">
+            <h1>English Language Platform</h1>
+            <p>منصة اللغة الانجليزية</p>
+        </div>
+
+        <div class="login-tabs">
+            <button type="button" class="tab-btn active" id="userTabBtn" onclick="switchLoginType('user')">اسم المستخدم</button>
+            <button type="button" class="tab-btn" id="emailTabBtn" onclick="switchLoginType('email')">البريد الإلكتروني</button>
+        </div>
+
+        <form id="loginForm" onsubmit="handleLogin(event)">
+            <div class="input-group" id="userInputGroup">
+                <label id="inputLabel">Username / اسم المستخدم</label>
+                <input type="text" id="credentialInput" placeholder="أدخل اسم المستخدم المخصص لك" required oninput="checkIfTeacherInput()">
+            </div>
+
+            <!-- خانة الصفوف بالصيغة الإنجليزية الصحيحة -->
+            <div class="input-group" id="classInputGroup">
+                <label>Class / الصف الدراسي</label>
+                <select id="classSelect">
+                    <option value="" disabled selected>Select your class...</option>
+                    <option value="9/2">9/2</option>
+                    <option value="9/3">9/3</option>
+                    <option value="9/4">9/4</option>
+                    <option value="9/5">9/5</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label>Password / كلمة المرور</label>
+                <input type="password" id="passwordInput" placeholder="••••••••" required>
+                <div class="error-msg" id="errorMsg">⚠️ البيانات المدخلة غير صحيحة!</div>
+            </div>
+
+            <button type="submit" class="login-btn">Login / تسجيل الدخول</button>
+        </form>
+    </div>
+
+    <!-- لوحة التحكم الرئيسية -->
+    <div class="dashboard-container" id="dashboardBox">
+        <div class="dashboard-header">
+            <div>
+                <h2>English Language Platform</h2>
+                <p>منصة اللغة الانجليزية</p>
+            </div>
+            <button class="logout-btn" onclick="handleLogout()">Logout</button>
+        </div>
+
+        <div class="top-bar-info">
+            <div class="user-welcome-banner" id="userWelcomeDisplay">Hi, User</div>
+            <div class="points-badge" id="userPointsDisplay">⭐ Your Points: 0</div>
+        </div>
+
+        <div class="sections-grid">
+            <div class="section-card" onclick="openSection('section1')">
+                <div class="main-title-box">
+                    <span class="en-main-title">Listening Section</span>
+                    <span class="ar-sub-title">قسم الاستماعات الصوتية</span>
+                </div>
+                <span class="card-icon">🎧</span>
+            </div>
+
+            <div class="section-card" onclick="openSection('section2')">
+                <div class="main-title-box">
+                    <span class="en-main-title">Verbs & Meanings</span>
+                    <span class="ar-sub-title">الأفعال ومعانيها (الصف التاسع)</span>
+                </div>
+                <span class="card-icon">⚡</span>
+            </div>
+
+            <div class="section-card" onclick="openSection('section3')">
+                <div class="main-title-box">
+                    <span class="en-main-title">Words, Forms & Meanings</span>
+                    <span class="ar-sub-title">كلمات المنهاج والمعاني</span>
+                </div>
+                <span class="card-icon">📚</span>
+            </div>
+
+            <div class="section-card" onclick="openSection('sectionReading')">
+                <div class="main-title-box">
+                    <span class="en-main-title">Reading Section</span>
+                    <span class="ar-sub-title">قسم النصوص الإثرائية</span>
+                </div>
+                <span class="card-icon">📖</span>
+            </div>
+
+            <div class="section-card" onclick="openSection('sectionPlan')">
+                <div class="main-title-box">
+                    <span class="en-main-title">Studying Plan</span>
+                    <span class="ar-sub-title">خطة الدراسة والمتابعة</span>
+                </div>
+                <span class="card-icon">📅</span>
+            </div>
+
+            <div class="section-card" onclick="openSection('sectionGrammar')">
+                <div class="main-title-box">
+                    <span class="en-main-title">Grammar Rules</span>
+                    <span class="ar-sub-title">قواعد اللغة الإنجليزية</span>
+                </div>
+                <span class="card-icon">💡</span>
+            </div>
+
+            <div class="section-card" onclick="openSection('sectionAssignments')">
+                <div class="main-title-box">
+                    <span class="en-main-title">Assignments & Quizzes</span>
+                    <span class="ar-sub-title">قسم الواجبات والاختبارات</span>
+                </div>
+                <span class="card-icon">📝</span>
+            </div>
+
+            <div class="section-card" onclick="openSection('sectionLeaderboard')">
+                <div class="main-title-box">
+                    <span class="en-main-title">Leaderboard</span>
+                    <span class="ar-sub-title">لوحة الأوائل والنقاط</span>
+                </div>
+                <span class="card-icon">🏆</span>
+            </div>
+        </div>
+
+        <div id="modalContainer"></div>
+
+        <div class="hidden-messi-quote">
+            ⚽ Channeling Messi's focus gives you an exceptional progress in English!
+        </div>
+
+    </div>
+
+    <script>
+        const allowedUsers = ["Teacher Ali", "Teacher Abdullah", "Zain bilal 011"];
+        const allowedEmails = ["ali@school.com", "abdullah@school.com", "zain@school.com"];
+        const unifiedPassword = "school2026";
+        let currentType = 'user';
+        let loggedInUsername = "";
+        let loggedInClass = "";
+
+        let savedQuestions = JSON.parse(localStorage.getItem("platform_questions")) || [];
+        let studentScores = JSON.parse(localStorage.getItem("platform_scores")) || {};
+        let studentClasses = JSON.parse(localStorage.getItem("platform_classes")) || {};
+        let studentAnswers = JSON.parse(localStorage.getItem("platform_student_answers")) || {};
+
+        window.onload = function() {
+            if (localStorage.getItem("isLoggedIn") === "true") {
+                const savedUser = localStorage.getItem("activeUser") || "User";
+                const savedClass = localStorage.getItem("activeClass") || "";
+                loggedInUsername = savedUser;
+                loggedInClass = savedClass;
+                
+                updateUIState();
+                document.getElementById('loginBox').style.display = 'none';
+                document.getElementById('dashboardBox').style.display = 'block';
+            }
+        };
+
+        function checkIfTeacherInput() {
+            const val = document.getElementById('credentialInput').value.trim().toLowerCase();
+            const classGroup = document.getElementById('classInputGroup');
+            const classSelect = document.getElementById('classSelect');
+
+            if (val.includes("teacher") || val === "ali@school.com" || val === "abdullah@school.com") {
+                classGroup.style.display = 'none';
+                classSelect.removeAttribute('required');
+            } else {
+                classGroup.style.display = 'block';
+                classSelect.setAttribute('required', 'true');
+            }
+        }
+
+        function switchLoginType(type) {
+            currentType = type;
+            const inputField = document.getElementById('credentialInput');
+            const inputLabel = document.getElementById('inputLabel');
+            const userBtn = document.getElementById('userTabBtn');
+            const emailBtn = document.getElementById('emailTabBtn');
+
+            if (type === 'user') {
+                inputLabel.innerText = "Username / اسم المستخدم";
+                inputField.placeholder = "أدخل اسم المستخدم المخصص لك";
+                userBtn.classList.add('active');
+                emailBtn.classList.remove('active');
+            } else {
+                inputLabel.innerText = "Email / البريد الإلكتروني";
+                inputField.placeholder = "example@school.com";
+                emailBtn.classList.add('active');
+                userBtn.classList.remove('active');
+            }
+            inputField.value = '';
+            checkIfTeacherInput();
+        }
+
+        function updateUIState() {
+            const isTeacher = (loggedInUsername === "Teacher Ali" || loggedInUsername === "Teacher Abdullah");
+            if (isTeacher) {
+                document.getElementById('userWelcomeDisplay').innerText = `Hi, ${loggedInUsername}`;
+                document.getElementById('userPointsDisplay').style.display = 'none';
+            } else {
+                document.getElementById('userWelcomeDisplay').innerText = `Hi, ${loggedInUsername} (${loggedInClass})`;
+                document.getElementById('userPointsDisplay').style.display = 'block';
+                const currentPoints = studentScores[loggedInUsername] || 0;
+                document.getElementById('userPointsDisplay').innerText = `⭐ Your Points: ${currentPoints}`;
+            }
+        }
+
+        function handleLogin(event) {
+            event.preventDefault(); 
+            const inputValue = document.getElementById('credentialInput').value.trim();
+            const password = document.getElementById('passwordInput').value;
+            const errorMsg = document.getElementById('errorMsg');
+
+            let isValid = false;
+            let displayName = inputValue;
+            let selectedClass = "";
+
+            const isTeacherInput = (inputValue.toLowerCase().includes("teacher") || inputValue === "ali@school.com" || inputValue === "abdullah@school.com");
+
+            if (!isTeacherInput) {
+                selectedClass = document.getElementById('classSelect').value;
+            }
+
+            if (currentType === 'user') {
+                if (allowedUsers.includes(inputValue) && password === unifiedPassword) {
+                    isValid = true;
+                }
+            } else {
+                if (allowedEmails.includes(inputValue) && password === unifiedPassword) {
+                    isValid = true;
+                    if(inputValue === "ali@school.com") displayName = "Teacher Ali";
+                    else if(inputValue === "abdullah@school.com") displayName = "Teacher Abdullah";
+                    else if(inputValue === "zain@school.com") displayName = "Zain bilal 011";
+                }
+            }
+
+            if (isValid) {
+                errorMsg.style.display = 'none';
+                localStorage.setItem("isLoggedIn", "true");
+                localStorage.setItem("activeUser", displayName);
+                localStorage.setItem("activeClass", selectedClass);
+                
+                loggedInUsername = displayName;
+                loggedInClass = selectedClass;
+
+                if (!isTeacherInput) {
+                    studentClasses[displayName] = selectedClass;
+                    localStorage.setItem("platform_classes", JSON.stringify(studentClasses));
+                    if (!studentScores[displayName]) {
+                        studentScores[displayName] = 0;
+                        localStorage.setItem("platform_scores", JSON.stringify(studentScores));
+                    }
+                }
+                
+                updateUIState();
+                document.getElementById('loginBox').style.display = 'none';
+                document.getElementById('dashboardBox').style.display = 'block';
+            } else {
+                errorMsg.style.display = 'block';
+            }
+        }
+
+        function handleLogout() {
+            localStorage.removeItem("isLoggedIn");
+            localStorage.removeItem("activeUser");
+            localStorage.removeItem("activeClass");
+            document.getElementById('dashboardBox').style.display = 'none';
+            document.getElementById('loginBox').style.display = 'block';
+            document.getElementById('credentialInput').value = '';
+            document.getElementById('passwordInput').value = '';
+            document.getElementById('modalContainer').innerHTML = '';
+        }
+
+        function createNewQuestion(event) {
+            event.preventDefault();
+            const qText = document.getElementById('qText').value.trim();
+            const qType = document.getElementById('qType').value;
+            const qAns = document.getElementById('qAns').value.trim();
+
+            let points = 3;
+            if (qType === 'tf') points = 2;
+            if (qType === 'essay') points = 5;
+
+            const newQ = {
+                id: Date.now(),
+                text: qText,
+                type: qType,
+                answer: qAns,
+                points: points
+            };
+
+            savedQuestions.push(newQ);
+            localStorage.setItem("platform_questions", JSON.stringify(savedQuestions));
+            alert("تم إنشاء السؤال ونشره للطلاب بنجاح! ✅");
+            openSection('sectionAssignments');
+        }
+
+        function deleteQuestion(qId) {
+            if(!confirm("هل أنت متأكد من حذف هذا السؤال؟ سيتم خصم نقاطه تلقائياً من الطلاب الذين أجابوا عليه!")) return;
+            
+            if(studentAnswers[qId]) {
+                for(let student in studentAnswers[qId]) {
+                    if(studentAnswers[qId][student].correct) {
+                        let qObj = savedQuestions.find(q => q.id === qId);
+                        if(qObj && studentScores[student]) {
+                            studentScores[student] = Math.max(0, studentScores[student] - qObj.points);
+                        }
+                    }
+                }
+                delete studentAnswers[qId];
+                localStorage.setItem("platform_student_answers", JSON.stringify(studentAnswers));
+                localStorage.setItem("platform_scores", JSON.stringify(studentScores));
+            }
+
+            savedQuestions = savedQuestions.filter(q => q.id !== qId);
+            localStorage.setItem("platform_questions", JSON.stringify(savedQuestions));
+            alert("تم حذف السؤال وإزالة نقاطه بنجاح!");
+            openSection('sectionAssignments');
+        }
+
+        function submitAnswer(qId, correctAns, points) {
+            const inputElem = document.getElementById(`ans_${qId}`);
+            const studentAns = inputElem.value.trim();
+            
+            if(!studentAns) {
+                alert("الرجاء كتابة إجابتك أولاً!");
+                return;
+            }
+
+            if (!studentAnswers[qId]) studentAnswers[qId] = {};
+            const qObj = savedQuestions.find(q => q.id === qId);
+
+            if (qObj.type === 'essay') {
+                studentAnswers[qId][loggedInUsername] = { answer: studentAns, correct: true };
+                localStorage.setItem("platform_student_answers", JSON.stringify(studentAnswers));
+                alert("تم إرسال إجابتك المقالية بنجاح للأستاذ! 📝");
+                openSection('sectionAssignments');
+                return;
+            }
+
+            let isCorrect = (studentAns.toLowerCase() === correctAns.toLowerCase());
+            studentAnswers[qId][loggedInUsername] = { answer: studentAns, correct: isCorrect };
+            localStorage.setItem("platform_student_answers", JSON.stringify(studentAnswers));
+
+            if (isCorrect) {
+                if (!studentScores[loggedInUsername]) studentScores[loggedInUsername] = 0;
+                studentScores[loggedInUsername] += points;
+                localStorage.setItem("platform_scores", JSON.stringify(studentScores));
+                alert(`إجابة صحيحة! 🎉 حصلت على ${points} نقاط.\nالإجابة الصحيحة كانت: ${correctAns}`);
+            } else {
+                alert(`إجابة خاطئة ❌\nالإجابة الصحيحة هي: ${correctAns}`);
+            }
+
+            updateUIState();
+            openSection('sectionAssignments');
+        }
+
+        const sectionsData = {
+            'section1': `
+                <div class="section-modal-content" style="display:block;">
+                    <div class="modal-header">
+                        <h3>Listening Section / قسم الاستماعات</h3>
+                        <button class="close-modal-btn" onclick="closeModal()">إغلاق ✕</button>
+                    </div>
+                    <ul class="audio-list">
+                        <li><span>Listening File 1</span><a href="https://drive.google.com/file/d/1peKvjY_DSqux3TyeIus72zV3Anl2P8yQ/view?usp=drivesdk" target="_blank" class="audio-btn">Open Audio 🔊</a></li>
+                        <li><span>Listening File 2</span><a href="https://drive.google.com/file/d/1LPfqmerhwHL1NzqdSKnL9U0F6tSYnHUR/view?usp=drivesdk" target="_blank" class="audio-btn">Open Audio 🔊</a></li>
+                        <li><span>Listening File 3</span><a href="https://drive.google.com/file/d/1jXhiNLIgJkVPeDbs164XCukZPMDL4VpX/view?usp=drivesdk" target="_blank" class="audio-btn">Open Audio 🔊</a></li>
+                        <li><span>Listening File 4</span><a href="https://drive.google.com/file/d/1lfVwjaVZjuJvTKg0Ty3WECbz1lnaOyYi/view?usp=drivesdk" target="_blank" class="audio-btn">Open Audio 🔊</a></li>
+                        <li><span>Listening File 5</span><a href="https://drive.google.com/file/d/1AtImVNnidbKHobYtKaDDx6l5k6Ais42y/view?usp=drivesdk" target="_blank" class="audio-btn">Open Audio 🔊</a></li>
+                    </ul>
+                </div>`,
+            'section2': `
+                <div class="section-modal-content" style="display:block;">
+                    <div class="modal-header">
+                        <h3>Verbs and Meanings / الأفعال ومعانيها</h3>
+                        <button class="close-modal-btn" onclick="closeModal()">إغلاق ✕</button>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Verb (v1)</th>
+                                <th>Past (v2)</th>
+                                <th>Past Participle (v3)</th>
+                                <th>Meaning (المعنى)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>accept</td><td>accepted</td><td>accepted</td><td>يقبل</td></tr>
+                            <tr><td>begin</td><td>began</td><td>begun</td><td>يبدأ</td></tr>
+                            <tr><td>break</td><td>broke</td><td>broken</td><td>يكسر</td></tr>
+                            <tr><td>bring</td><td>brought</td><td>brought</td><td>يحضر</td></tr>
+                            <tr><td>eat</td><td>ate</td><td>eaten</td><td>يأكل</td></tr>
+                            <tr><td>go</td><td>went</td><td>gone</td><td>يذهب</td></tr>
+                        </tbody>
+                    </table>
+                </div>`,
+            'section3': `
+                <div class="section-modal-content" style="display:block;">
+                    <div class="modal-header">
+                        <h3>Words, Forms & Meanings / كلمات المنهاج والمعاني</h3>
+                        <button class="close-modal-btn" onclick="closeModal()">إغلاق ✕</button>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Word</th>
+                                <th>Form</th>
+                                <th>Mean</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Book</td><td>Noun (اسم)</td><td>كتاب</td></tr>
+                            <tr><td>School</td><td>Noun (اسم)</td><td>مدرسة</td></tr>
+                            <tr><td>Teacher</td><td>Noun (اسم)</td><td>معلم</td></tr>
+                            <tr><td>Student</td><td>Noun (اسم)</td><td>طالب</td></tr>
+                            <tr><td>Playing</td><td>Verb/Noun</td><td>يلعب / اللعب</td></tr>
+                        </tbody>
+                    </table>
+                </div>`,
+            'sectionReading': `
+                <div class="section-modal-content" style="display:block;">
+                    <div class="modal-header">
+                        <h3>Reading Section / قسم القراءة</h3>
+                        <button class="close-modal-btn" onclick="closeModal()">إغلاق ✕</button>
+                    </div>
+                    <ul class="audio-list">
+                        <li>
+                            <span>Reading Practice Document (Grade 9)</span>
+                            <a href="https://drive.google.com/file/d/18IlhT-c4wrUmWC8KCIMP-xI5IMYkuSMI/view?usp=drivesdk" target="_blank" class="audio-btn">Open File 📖</a>
+                        </li>
+                    </ul>
+                </div>`,
+            'sectionPlan': `
+                <div class="section-modal-content" style="display:block;">
+                    <div class="modal-header">
+                        <h3>Studying Plan / خطة الدراسة</h3>
+                        <button class="close-modal-btn" onclick="closeModal()">إغلاق ✕</button>
+                    </div>
+                    <ul class="audio-list">
+                        <li>
+                            <span>Official Studying Plan File</span>
+                            <a href="https://drive.google.com/file/d/1B8xE-KdyNouPxesdrVTeRXroZAyL_SfP/view?usp=drivesdk" target="_blank" class="audio-btn">Open Plan 📅</a>
+                        </li>
+                    </ul>
+                </div>`,
+            'sectionGrammar': `
+                <div class="section-modal-content" style="display:block;">
+                    <div class="modal-header">
+                        <h3>Grammar Rules / القواعد الأساسية</h3>
+                        <button class="close-modal-btn" onclick="closeModal()">إغلاق ✕</button>
+                    </div>
+                    <ul class="audio-list">
+                        <li><span>Grammar File 1</span><a href="https://drive.google.com/file/d/1onHuM9x81AdoGrTvNY7ahCEe02Zh3jQh/view?usp=drivesdk" target="_blank" class="audio-btn">Open File 💡</a></li>
+                        <li><span>Grammar File 2</span><a href="https://drive.google.com/file/d/1ONV6RgFGHw2l_ZnOEKwtr47qiaQlnn47/view?usp=drivesdk" target="_blank" class="audio-btn">Open File 💡</a></li>
+                    </ul>
+                </div>`,
+            'sectionAssignments': getAssignmentsContent(),
+            'sectionLeaderboard': getLeaderboardContent()
+        };
+
+        function getAssignmentsContent() {
+            const isTeacher = (loggedInUsername === "Teacher Ali" || loggedInUsername === "Teacher Abdullah");
+            
+            if (isTeacher) {
+                let html = `
+                <div class="section-modal-content" style="display:block;">
+                    <div class="modal-header">
+                        <h3>Assignments & Quizzes (Teacher Panel)</h3>
+                        <button class="close-modal-btn" onclick="closeModal()">إغلاق ✕</button>
+                    </div>
+                    <div style="background: #f8fafc; padding: 20px; border-radius: 12px; border: 1px solid #e2e8f0; margin-bottom: 20px;">
+                        <h4 style="color: #1e1b4b; margin-bottom: 12px;">إنشاء سؤال أو واجب جديد:</h4>
+                        <form onsubmit="createNewQuestion(event)">
+                            <label style="font-weight: 700; font-size: 13px; color: #334155;">نص السؤال (Question Text):</label>
+                            <input type="text" id="qText" class="form-control-custom" placeholder="اكتب السؤال هنا..." style="direction: rtl;" required>
+                            
+                            <label style="font-weight: 700; font-size: 13px; color: #334155;">نوع السؤال (Question Type):</label>
+                            <select id="qType" class="form-control-custom" style="direction: rtl;">
+                                <option value="mcq">خيارات متعددة (Multiple Choice) - 3 نقاط</option>
+                                <option value="tf">صح وخطأ (True / False) - 2 نقاط</option>
+                                <option value="essay">مقالي (Essay) - 5 نقاط (يصححه الأستاذ)</option>
+                            </select>
+
+                            <label style="font-weight: 700; font-size: 13px; color: #334155;">الإجابة الصحيحة:</label>
+                            <input type="text" id="qAns" class="form-control-custom" placeholder="اكتب الإجابة الصحيحة...">
+
+                            <button type="submit" class="submit-quiz-btn">نشر السؤال للطلاب 🚀</button>
+                        </form>
+                    </div>`;
+
+                if (savedQuestions.length > 0) {
+                    html += `<h4 style="color: #1e1b4b; margin-bottom: 10px;">الأسئلة الحالية المنشورة:</h4>`;
+                    savedQuestions.forEach((q, index) => {
+                        html += `<div style="background:#fff; padding:12px; border:1px solid #e2e8f0; border-radius:8px; margin-bottom:10px; display:flex; justify-content:space-between; align-items:center;">
+                            <div><b>Q${index+1}:</b> ${q.text} <span style="color:#6366f1; font-size:12px;">(${q.points} Points)</span></div>
+                            <button type="button" class="delete-btn" onclick="deleteQuestion(${q.id})">حذف السؤال 🗑️</button>
+                        </div>`;
+                    });
+                }
+                html += `</div>`;
+                return html;
+            } else {
+                let html = `
+                <div class="section-modal-content" style="display:block;">
+                    <div class="modal-header">
+                        <h3>Assignments & Quizzes / الواجبات والاختبارات</h3>
+                        <button class="close-modal-btn" onclick="closeModal()">إغلاق ✕</button>
+                    </div>`;
+
+                if (savedQuestions.length === 0) {
+                    html += `<div class="empty-state">(Empty) - No assignments posted by teachers yet. Check back soon!</div>`;
+                } else {
+                    savedQuestions.forEach((q, index) => {
+                        const hasAnswered = studentAnswers[q.id] && studentAnswers[q.id][loggedInUsername];
+                        let answeredHtml = "";
+
+                        if (hasAnswered) {
+                            answeredHtml = `<div style="color: #10b981; font-weight: 700; margin-top: 8px;">✅ تم إجابتك على هذا السؤال مسبقاً!</div>`;
+                        } else {
+                            answeredHtml = `
+                            <input type="text" id="ans_${q.id}" class="form-control-custom" placeholder="اكتب إجابتك هنا..." style="margin-top: 8px;">
+                            <button type="button" class="submit-quiz-btn" onclick="submitAnswer(${q.id}, '${q.answer}', ${q.points})">إرسال الإجابة ✉️</button>`;
+                        }
+
+                        html += `
+                        <div style="background: #f8fafc; padding: 15px; border-radius: 10px; border: 1px solid #e2e8f0; margin-bottom: 15px;">
+                            <p style="font-weight: 700; color: #1e293b; margin-bottom: 8px;">Q${index+1}: ${q.text} <span style="color: #4f46e5; font-size: 13px;">[${q.points} Points]</span></p>
+                            ${answeredHtml}
+                        </div>`;
+                    });
+                }
+                html += `</div>`;
+                return html;
+            }
+        }
+
+        function getLeaderboardContent() {
+            let keys = Object.keys(studentScores);
+            let studentKeys = keys.filter(st => !st.startsWith("Teacher"));
+
+            if (studentKeys.length === 0) {
+                return `
+                <div class="section-modal-content" style="display:block;">
+                    <div class="modal-header">
+                        <h3>Leaderboard / لوحة الأوائل</h3>
+                        <button class="close-modal-btn" onclick="closeModal()">إغلاق ✕</button>
+                    </div>
+                    <div class="empty-state">
+                        (Empty Leaderboard) - No points or active student scores yet.
+                    </div>
+                </div>`;
+            }
+
+            let sortedStudents = studentKeys.sort((a, b) => studentScores[b] - studentScores[a]);
+            let tableRows = "";
+            
+            sortedStudents.forEach((st, idx) => {
+                let stClass = studentClasses[st] || "9/2";
+                tableRows += `<tr><td>#${idx+1}</td><td><b>${st}</b></td><td><span style="direction:ltr; display:inline-block;">${stClass}</span></td><td><span style="color: #4f46e5; font-weight: 800;">${studentScores[st]} Points</span></td></tr>`;
+            });
+
+            return `
+            <div class="section-modal-content" style="display:block;">
+                <div class="modal-header">
+                    <h3>Leaderboard / لوحة الأوائل</h3>
+                    <button class="close-modal-btn" onclick="closeModal()">إغلاق ✕</button>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Rank</th>
+                            <th>Student Name</th>
+                            <th>Class</th>
+                            <th>Score</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${tableRows}
+                    </tbody>
+                </table>
+            </div>`;
+        }
+
+        function openSection(sectionId) {
+            if(sectionId === 'sectionAssignments') {
+                sectionsData['sectionAssignments'] = getAssignmentsContent();
+            }
+            if(sectionId === 'sectionLeaderboard') {
+                sectionsData['sectionLeaderboard'] = getLeaderboardContent();
+            }
+            document.getElementById('modalContainer').innerHTML = sectionsData[sectionId];
+        }
+
+        function closeModal() {
+            document.getElementById('modalContainer').innerHTML = '';
+        }
+    </script>
+
+</body>
+</html>
